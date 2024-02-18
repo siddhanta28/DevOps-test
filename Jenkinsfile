@@ -4,7 +4,7 @@ pipeline {
     }
 
     stages {
-        stage('Build Docker Image') {
+        stage('node version') {
             steps {
                 script {
                     // Build Docker image using Dockerfile in the repository
@@ -13,5 +13,5 @@ pipeline {
             }
         }
 
-       }
+    }
 }
