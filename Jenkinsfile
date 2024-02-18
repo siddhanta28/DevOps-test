@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        stage ('install docker'){
+            steps{
+                script{
+                    sh 'apt install docker -y'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
