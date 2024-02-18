@@ -1,19 +1,19 @@
 pipeline {
-    agent docker
+    agent any
 
     stages {
-        stage ('install docker'){
-            steps{
-                script{
-                    sh 'apt install docker -y'
-                }
+        stage('Checkout') {
+            steps {
+                // Checkout code from the GitHub repository
+                checkout scm
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image
-                    sh 'docker build -t node-test .'
+                    // Build Docker image using Dockerfile in the repository
+                    docker.build('node-test')
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    sh 'docker run -dp 5001:5001 node-test'
+                    docker.image('node-test').run('-p 5001:5001 -d')
                 }
             }
         }
