@@ -1,17 +1,30 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Build steps go here'
+            }
         }
     }
 
-    stages {
-        stage('Build') {
+
+        stage('Test') {
             steps {
-                script {
-                    // Your Docker-related commands here
-                    sh 'node --version'
-                }
+                echo 'Test steps go here'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deployment steps go here'
             }
         }
     }
